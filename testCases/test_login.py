@@ -15,7 +15,7 @@ class Test_001_Login:
 
     logger=LogGen.loggen()
 
-
+    @pytest.mark.regression
     def test_loginTitle(self,setup):
         self.logger.info("************** Test_oo1_Login ************")
         self.logger.info("************* Verifying Login Title **********")
@@ -34,7 +34,8 @@ class Test_001_Login:
             self.logger.error("************* Login page title is failed *********")
             assert False
 
-
+    @pytest.mark.sanity
+    @pytest.mark.regression
     def test_login(self,setup):
         self.logger.info("************ Verifying Login Test *************")
         self.driver = setup
@@ -56,6 +57,7 @@ class Test_001_Login:
             self.logger.error("************** Login test is failed **********")
             assert False
 
+    @pytest.mark.regression
     def test_login1(self, setup):
         self.logger.info("************ Verifying Login1 Test *************")
         self.driver = setup
@@ -75,7 +77,7 @@ class Test_001_Login:
             self.driver.save_screenshot(".\\Screenshots\\" + "test_login1.png")
             assert False
 
-
+    @pytest.mark.regression
     def test_login2(self, setup):
         self.logger.info("************ Verifying Login2 Test *************")
         self.driver = setup

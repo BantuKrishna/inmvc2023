@@ -19,6 +19,8 @@ class Test_002_BookRoom:
     add = ReadConfig.getadd()
     logger=LogGen.loggen()
 
+    @pytest.mark.sanity
+    @pytest.mark.regression
     def test_bookroom(self,setup):
         self.logger.info("*************** Test_002_BookRoom **********************")
         self.driver=setup
@@ -54,6 +56,7 @@ class Test_002_BookRoom:
             self.driver.save_screenshot(".\\Screenshots\\" + "test_bookroom.png")
             assert False
 
+    @pytest.mark.regression
     def test_bookroom1(self, setup):
         self.logger.info("*************** Test_002_BookRoom **********************")
         self.driver = setup
@@ -79,7 +82,7 @@ class Test_002_BookRoom:
         self.br.clickApps()
         self.br.clickBroom()
         time.sleep(3)
-        if "Please login again to your Teams account to create a meeting" in self.driver.page_source:
+        if "Invalid Params" in self.driver.page_source:
             self.logger.info("********** Book Room test1 is passed *********")
             self.driver.close()
 
@@ -89,6 +92,8 @@ class Test_002_BookRoom:
             self.driver.save_screenshot(".\\Screenshots\\" + "test_bookroom.png")
             assert False
 
+    @pytest.mark.sanity
+    @pytest.mark.regression
     def test_bookroom2(self, setup):
         self.logger.info("*************** Test_002_BookRoom **********************")
         self.driver = setup
@@ -113,18 +118,20 @@ class Test_002_BookRoom:
         self.br.setDesc(self.desc)
         self.br.setMeetlink(self.meetlink)
         self.br.clickBroom()
-        time.sleep(3)
+        time.sleep(5)
         if "Successfully booked a meeting room" in self.driver.page_source:
-            self.logger.info("********** Book Room test1 is passed *********")
+            self.logger.info("********** Book Room test2 is passed *********")
             self.driver.close()
 
         else:
             # Log and take a screenshot
-            self.logger.error("************** Book Room test1 is failed **********")
+            self.logger.error("************** Book Room test2 is failed **********")
             self.driver.save_screenshot(".\\Screenshots\\" + "test_bookroom.png")
             assert False
 
 
+    @pytest.mark.sanity
+    @pytest.mark.regression
     def test_bookroom3(self, setup):
         self.logger.info("*************** Test_002_BookRoom **********************")
         self.driver = setup
@@ -151,14 +158,14 @@ class Test_002_BookRoom:
         self.br.setAdd(self.add)
         self.br.setAdd(Keys.ENTER)
         self.br.clickBroom()
-        time.sleep(3)
+        time.sleep(5)
         if "Successfully booked a meeting room" in self.driver.page_source:
-            self.logger.info("********** Book Room test1 is passed *********")
+            self.logger.info("********** Book Room test3 is passed *********")
             self.driver.close()
 
         else:
             # Log and take a screenshot
-            self.logger.error("************** Book Room test1 is failed **********")
+            self.logger.error("************** Book Room test3 is failed **********")
             self.driver.save_screenshot(".\\Screenshots\\" + "test_bookroom.png")
             assert False
 

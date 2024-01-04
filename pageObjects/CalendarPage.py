@@ -11,8 +11,14 @@ class CalendarPage:
     button_appl_xpath = "//span[text()='Apply']"
     button_arr_xpath = "/html/body/div/div/div[1]/div[2]/div[3]/div/div/div/div/div[1]/div/div[1]/div/span[1]"
     button_nex_xpath = "//button[@title='Next month']"
-    button_dat_xpath = "/html/body/div[2]/div[3]/ul/div/div[2]/div/div/div[2]/div/div[3]/button[4]"
-    button_tim_xpath = "(//div[@class='rbc-timeslot-group'])[35]"
+    button_dat_xpath = "//button[normalize-space()='13']"
+    button_tim_xpath = "//div[@title='10:00 AM – 10:15 AM: Testing Team Meeting']"
+    button_Edit_xpath = "//button[normalize-space()='Edit meeting']"
+    textbox_add_xpath = "/html/body/div/div/div[1]/div[2]/div[3]/div/div/div/div/div/div[2]/div[7]/div/div[1]/div/div/div/div/div/input"
+    button_Update_xpath = "//button[normalize-space()='Update Meeting']"
+    button_Upda_xpath = "//button[normalize-space()='Update']"
+
+
 
     def __init__(self, driver):
         self.driver = driver
@@ -49,7 +55,36 @@ class CalendarPage:
         time.sleep(3)
         self.driver.find_element(By.XPATH,self.button_dat_xpath).click()
 
+    # def clickTim(self):
+    #     time.sleep(5)
+    #     self.driver.find_element(By.CSS_SELECTOR,self.button_tim_xpath).click()
+
     def clickTim(self):
-        time.sleep(1)
-        self.driver.find_element(By.XPATH,self.button_tim_xpath)
-        time.sleep(2)
+            time.sleep(5)  # It's better to replace this sleep with JavaScript Executor
+            element = self.driver.find_element(By.XPATH, self.button_tim_xpath)
+
+            # Use JavaScript Executor to scroll into view
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+
+            # Optionally, you can add a small pause to allow the scroll to take effect
+            time.sleep(1)
+
+            # Click the element using JavaScript Executor
+            self.driver.execute_script("arguments[0].click();", element)
+            time.sleep(2)
+
+    def clickEdit(self):
+        time.sleep(3)
+        self.driver.find_element(By.XPATH,self.button_Edit_xpath).click()
+
+    def setadd(self,add):
+        time.sleep(3)
+        self.driver.find_element(By.XPATH,self.textbox_add_xpath).send_keys(add)
+
+    def clickUpdate(self):
+        time.sleep(3)
+        self.driver.find_element(By.XPATH,self.button_Update_xpath).click()
+
+    def clickUpda(self):
+        time.sleep(3)
+        self.driver.find_element(By.XPATH,self.button_Upda_xpath).click()

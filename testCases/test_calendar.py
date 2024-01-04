@@ -1,8 +1,11 @@
 import time
+from telnetlib import EC
 
 import pytest
 from selenium import webdriver
 from selenium.webdriver import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 from pageObjects.BookRoom import BookRoom
 from pageObjects.CalendarPage import CalendarPage
@@ -14,8 +17,11 @@ class Test_003_Calendar:
     baseURL = ReadConfig.getApplicationURL()
     username = ReadConfig.getUseremail()
     password = ReadConfig.getPassword()
+    add = ReadConfig.getadd()
     logger = LogGen.loggen()
 
+    @pytest.mark.sanity
+    @pytest.mark.regression
     def test_calendar(self,setup):
         self.logger.info("*************** Test_002_Calendar **********************")
         self.driver = setup
@@ -42,4 +48,24 @@ class Test_003_Calendar:
         time.sleep(3)
         self.cp.clickTim()
         time.sleep(3)
+        self.cp.clickEdit()
+        time.sleep(3)
+        self.cp.setadd(self.add)
+        self.cp.setadd(Keys.ENTER)
+        time.sleep(3)
+        self.cp.clickUpdate()
+        time.sleep(3)
+        self.cp.clickUpda()
+
+
+        # def clickTim(self):
+        #     wait = WebDriverWait(self.driver, 10)  # Adjust the timeout as needed
+            # time_slot_element = wait.until(
+            #     EC.element_to_be_clickable((By.XPATH, self.button_tim_xpath))
+            # )
+        #     time.sleep(5)
+        # self.cp.button_tim_xpath.click()
+
+
+        time.sleep(5)
         self.driver.close()
